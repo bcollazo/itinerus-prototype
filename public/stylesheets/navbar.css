@@ -1,0 +1,27 @@
+.bnavbar {
+	padding: 4px 20px;
+	background-color: #F3A919;
+	font-size: 20px;
+	height: 60px;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	z-index: 10;
+}
+.bnavbar a.brand {
+	font-size: 32px;
+	color: white;
+	display: block;
+	padding: 4px;
+	cursor: pointer;
+	min-width: 50px;
+}
+.bnavbar a.brand:hover {
+	text-decoration: none;
+	color: #ddd;
+}
+
+/*nav.navbar {
+	background-color: #F3A919;
+}
+nav.navbar a.navbar-brand {
+	color: white;
+}*/
