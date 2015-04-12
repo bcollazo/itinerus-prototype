@@ -8,17 +8,21 @@ $(document).ready(function() {
 	// });
 
 	var submitCityQuery = function(query) {
-		console.log(query);
 		var query = $("input#search_box").val();
 		$('#selected_city h1').text(query);
 		$('#selected_city').show();
 		$('#selected_city').addClass('animated fadeIn');
+
 		$('#search_banner').addClass('animated fadeOutUp');
-		// $('input#search_box').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', doSomething);
+		$('#search_banner').hide();
 
 		var queryUrl = encodeURIComponent(query);
 		$.get("/places/"+queryUrl, function(data) {
 			console.log(data);
+			$("#place_selection").html(data);
+
+			$('#top_places').show();
+			$('#top_places').addClass('animated fadeIn');
 		});
 	}
 

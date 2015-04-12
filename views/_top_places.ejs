@@ -1,0 +1,17 @@
+<div id="top_places" class="fluid-container" style="display: none;">
+	<% for (var i in places) { %>
+	<div class="picture" data-id="<%= places[i].id %>">
+		<img src="<%= places[i].images[0] %>">
+		<div class="mask"></div>
+	</div>
+	<% } %>
+</div>
+
+<div class="content-panes container">
+	<% for (var i in places) { %>
+	<div class="content" data-id="<% places[i].id %>">
+		<h2><%= places[i].title %></h2>
+		<p class="lead"><%= places[i].description %></p>
+	</div>
+	<% } %>
+</div>
