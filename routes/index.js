@@ -10,8 +10,6 @@ router.get('/', function(req, res) {
 router.get('/places/:city', function(req, res) {
 	var city = req.params["city"];
 	var places = place.Place.find({city: city}, function(err, docs) {
-		// res.json(docs);
-		console.log(docs[0].images[0]);
 		res.render('_top_places', {places: docs});
 	});
 });

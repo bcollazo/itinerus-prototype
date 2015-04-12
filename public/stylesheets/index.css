@@ -22,6 +22,7 @@
   height: 240px;
   background-color: #222;
 }
+/*take from: http://designshack.net/articles/css/joshuajohnson-2/*/
 #top_places .picture {
   position: relative;
   border: 6px solid #fff;  
@@ -41,6 +42,7 @@
   max-height: 300px;
   max-width: 300px;
 }
+/*taken from http://www.alessioatzeni.com/blog/css3-hover-effects/*/
 #top_places .picture .mask {
    position:absolute; /* Center the mask */
    top:50px;
