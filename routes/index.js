@@ -4,7 +4,11 @@ var place = require('../models/place');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	res.render('index');
+	// res.render('index');
+	var city = "Puerto Rico";
+	var places = place.Place.find({city: city}, function(err, docs) {
+		res.render('index', {places: docs});
+	});
 });
 
 router.get('/places/:city', function(req, res) {

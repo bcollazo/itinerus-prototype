@@ -7,10 +7,10 @@
   </head>
   <body>
   	<% include _navbar2.ejs %>
-  	<div id="selected_city" style="display: none;">
-  		<h1>Boston, MA</h1>
+  	<div id="selected_city" style="display: block;">
+  		<h1>Puerto Rico</h1>
   	</div>
-  	<div id="search_banner">
+  	<div id="search_banner" style="display: none;">
 	  	<div class="container">
 	  		<div id="search" class="row">
 	  			<div class="col-md-offset-3 col-md-6 col-xs-12">
@@ -24,7 +24,10 @@
 			</div>
 	  	</div>
 	</div>
+	<div class="select_instructions">
+	</div>
 	<div id="place_selection">
+		<% include _top_places.ejs %>
 	</div>
   </body>
 </html>

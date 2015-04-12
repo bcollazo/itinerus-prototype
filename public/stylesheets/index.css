@@ -19,8 +19,13 @@
 }
 
 #top_places {
-  height: 240px;
+  height: 280px;
   background-color: #222;
+  color: white;
+}
+#top_places h2 {
+  margin: 0px;
+  padding: 10px;
 }
 /*take from: http://designshack.net/articles/css/joshuajohnson-2/*/
 #top_places .picture {
@@ -29,7 +34,7 @@
   float: left;
   height: 200px;
   width: 200px;
-  margin: 20px 10px;
+  margin: 10px;
   overflow: hidden;
    
   -webkit-box-shadow: 5px 5px 5px #111;
@@ -44,26 +49,49 @@
 }
 /*taken from http://www.alessioatzeni.com/blog/css3-hover-effects/*/
 #top_places .picture .mask {
-   position:absolute; /* Center the mask */
-   top:50px;
-   left:50px;
+   position:absolute;
+   top:0px;
+   left:0px;
    cursor:pointer;
-   border-radius: 50px;
-   border-width: 50px;
+   /*border-radius: 50px;*/
+   /*border-width: 50px;*/
    display: inline-block;
    height: 100px;
    width: 100px;
-   border: 50px solid rgba(0, 0, 0, 0.7);
-   box-sizing:border-box;
+   /*border: 50px solid rgba(0, 0, 0, 0.7);*/
+   background-color: rgba(0, 0,0,0.7);
+   /*box-sizing:border-box;*/
    opacity:1;
    visibility:visible;
    transform:scale(4);
-   transition:all 0.3s ease-in-out;
+   transition:all 0.1s ease-in-out;
 }
 #top_places .picture:hover .mask {
    opacity: 0;
-   border:0px solid rgba(0,0,0,0.7);
+   /*border:0px solid rgba(0,0,0,0.7);*/
+   background-color: rgba(0,0,0,0.0);
    visibility:hidden;
+}
+#top_places .picture .checkmark {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  font-size: 2.5em;
+  padding: 6px;
+  height: 50px;
+  color: white;
+  background-color: #222;
+  border-radius: 50%;
+  border: 2px solid white;
+  opacity: 0;
+}
+#top_places .picture:hover .checkmark {
+  opacity: 1;
+  transition:all 0.1s ease-in-out;
+}
+#top_places .picture .checkmark i {
+  position: relative;
+  top: -8px;
 }
 
 

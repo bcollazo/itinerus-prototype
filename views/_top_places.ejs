@@ -1,8 +1,25 @@
-<div id="top_places" class="fluid-container" style="display: none;">
+<div id="top_places" class="fluid-container">
+	<h2>What places do you want to go? <small>Showing Top Places</small>
+	<!-- <div class="dropdown">
+		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+			Dropdown
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+			<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+			<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+			<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+			<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+		</ul>
+	</div> -->
+	</h2>
 	<% for (var i in places) { %>
 	<div class="picture" data-id="<%= places[i].id %>">
 		<img src="<%= places[i].images[0] %>">
 		<div class="mask"></div>
+		<div class="checkmark">
+			<i class="fa fa-check"></i>
+		</div>
 	</div>
 	<% } %>
 </div>
