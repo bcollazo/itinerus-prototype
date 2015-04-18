@@ -1,0 +1,13 @@
+<div class="container">
+	<div class="page-header">
+		<h2>Recommended Itinerary</h2>
+	</div>
+	<p class="lead">Days: <%= itinerary.days %></p>
+	<p class="lead">Total Traveling Time: <%= itinerary.travel_time %></p>
+	<% for (var i in itinerary.places) { %>
+	<div class="place">
+		<img src="<%= itinerary.places[i].images[0] %>" />
+		<h3><%= itinerary.places[i].title %></h3>
+	</div>
+	<% } %>
+</div>

@@ -54,5 +54,15 @@ $(document).ready(function() {
 		$(".page").hide();
 		$("#loading_page").addClass("animated fadeIn");
 		$("#loading_page").show();
+
+		var place_ids = Object.keys(selected_places);
+		console.log(place_ids);
+		$.get("/itinerary", {q: place_ids.join(",")}, function(data) {
+			$(".page").hide();
+
+			$("#results_page").html(data);
+			$("#results_page").show();
+			$("#results_page").addClass("animated fadeIn");
+		});
 	});
 });

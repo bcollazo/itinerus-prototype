@@ -61,9 +61,9 @@ var dicts = [
 		city: "Puerto Rico",
 		images: ["http://www.puertoricoblogger.com/wp-content/uploads/2015/02/Cueva-Ventana-21.jpg"]
 }]
-for (var i in dicts) {
-	Place.findOrCreate(dicts[i], function(err, doc) {
-		if (err) return console.log(err);
-		console.log(doc);
-	});
-}
+// for (var i in dicts) {
+// 	Place.findOrCreate(dicts[i], function(err, doc) {
+// 		if (err) return console.log(err);
+// 		console.log(doc);
+// 	});
+// }

@@ -114,8 +114,9 @@
 .content-panes {
   height: 200px;
 }
-
+  
 .loader-gif {
+  margin-top: 40px;
   background: url("../images/495.GIF") center center no-repeat;
   height: 200px;
 }
