@@ -67,7 +67,7 @@ var dicts = [
 		end_time: 1800,
 		duration: 250,
 		latitude: 18.470935,
-		longitude: -66.123506
+		longitude: -66.123506,
 		city: "Puerto Rico",
 		images: ["http://upload.wikimedia.org/wikipedia/commons/9/94/FortElMorro_SanJuan_PuertoRico.jpg"]
 	}, {
