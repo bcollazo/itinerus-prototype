@@ -1,3 +1,18 @@
+#search_page.page #search_banner {
+  background-image: url("../images/beach.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 400px;
+}
+#search.row {
+  margin-top: 150px;
+}
+#search.row .input-group {
+  width: 100%;
+}
+
+/*===== PAGE 2*/
 #selected_city {
 	margin-top: -20px;
 	height: 60px;
@@ -9,13 +24,6 @@
 }
 #selected_city h1 {
 	padding-top: 10px;
-}
-
-#search.row {
-	margin-top: 100px;
-}
-#search.row .input-group {
-	width: 100%;
 }
 
 #top_places {
@@ -68,7 +76,6 @@
 }
 #top_places .picture:hover .mask {
    opacity: 0;
-   /*border:0px solid rgba(0,0,0,0.7);*/
    background-color: rgba(0,0,0,0.0);
    visibility:hidden;
 }
@@ -94,43 +101,21 @@
   top: -8px;
 }
 
+#top_places .picture.active .checkmark {
+  opacity: 1;
+  background-color: green;
+}
+#top_places .picture.active .mask {
+   opacity: 0;
+   background-color: rgba(0,0,0,0.0);
+   visibility:hidden;
+}
 
-/* Place */
-.photo {
-	margin: 20px;
-	padding: 5px;
-	/*padding-bottom: 20px;*/
-	border: 1px solid #ddd;
-	border-radius: 2px;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-	width: 440px;
+.content-panes {
+  height: 200px;
 }
-.placevent {
-  background: 
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.4)
-    ),
-    url(../images/elyunque.jpg);
-  /*background-size: 500px;*/
-  width: 400px;
-  height: 300px;
-  position: relative;
-  overflow: hidden;
-  margin: 10px;
-  border-radius: 2px;
-}
-.placevent > header {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px 10px;
-}
-.placevent > header > h1 {
-  margin: 0;
-  color: white;
-  text-shadow: 0 1px 0 black;
-  font-weight: bold;
+
+.loader-gif {
+  background: url("../images/495.GIF") center center no-repeat;
+  height: 200px;
 }

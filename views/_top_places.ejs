@@ -26,7 +26,7 @@
 
 <div class="content-panes container">
 	<% for (var i in places) { %>
-	<div class="content" data-id="<% places[i].id %>">
+	<div class="content" data-id="<%= places[i].id %>" style="display: none;">
 		<h2><%= places[i].title %></h2>
 		<p class="lead"><%= places[i].description %></p>
 	</div>
