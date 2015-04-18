@@ -30,6 +30,8 @@
   height: 280px;
   background-color: #222;
   color: white;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 #top_places h2 {
   margin: 0px;
