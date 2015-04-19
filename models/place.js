@@ -65,7 +65,7 @@ var dicts = [
 		description: "Castillo San Felipe del Morro also known as Fort San Felipe del Morro or Morro Castle, is a 16th-century citadel located in San Juan, Puerto Rico.",
 		start_time: 900,
 		end_time: 1800,
-		duration: 250,
+		duration: 230,
 		latitude: 18.470935,
 		longitude: -66.123506,
 		city: "Puerto Rico",
@@ -85,7 +85,7 @@ var dicts = [
 		description: "The Camuy River Cave Park is a cave system in Puerto Rico. It is located between the municipalities of Camuy, Hatillo and Lares in northwestern Puerto Rico, but the main entrance to the park is located in Quebrada, Camuy.",
 		start_time: 830,
 		end_time: 1545,
-		duration: 150,
+		duration: 130,
 		latitude: 18.3585248,
 		longitude: -66.8250654,
 		city: "Puerto Rico",
@@ -111,9 +111,9 @@ var dicts = [
 		city: "Puerto Rico",
 		images: ["http://www.puertoricoblogger.com/wp-content/uploads/2015/02/Cueva-Ventana-21.jpg"]
 }]
-for (var i in dicts) {
-	Place.findOrCreate(dicts[i], function(err, doc) {
-		if (err) return console.log(err);
-		console.log(doc);
-	});
-}
+// for (var i in dicts) {
+// 	Place.findOrCreate(dicts[i], function(err, doc) {
+// 		if (err) return console.log(err);
+// 		console.log(doc);
+// 	});
+// }
