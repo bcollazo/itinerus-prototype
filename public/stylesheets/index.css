@@ -30,8 +30,14 @@
   height: 280px;
   background-color: #222;
   color: white;
-  overflow-x: auto;
-  overflow-y: hidden;
+}
+#top_places .picture-wrapper {
+/*  overflow-x: scroll;
+  overflow-y: hidden;*/
+  overflow: auto;
+  white-space: nowrap;
+  height: 220px;
+
 }
 #top_places h2 {
   margin: 0px;
@@ -41,11 +47,13 @@
 #top_places .picture {
   position: relative;
   border: 6px solid #fff;  
-  float: left;
+  /*float: left;*/
+  display: inline-block;
   height: 200px;
   width: 200px;
   margin: 10px;
   overflow: hidden;
+  /*white-space: nowrap;*/
    
   -webkit-box-shadow: 5px 5px 5px #111;
           box-shadow: 5px 5px 5px #111;  
