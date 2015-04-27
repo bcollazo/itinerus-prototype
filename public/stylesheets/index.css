@@ -26,18 +26,33 @@
 	padding-top: 10px;
 }
 
+.right-hover-scroll {
+  position:absolute;
+  right:0;
+  height: 240px;
+  width:150px;
+  z-index: 1;
+  float: right;
+}
+.left-hover-scroll {
+  position:absolute;
+  left:0;
+  height: 240px;
+  width: 150px;
+  z-index: 1;
+}
+
 #top_places {
   height: 280px;
   background-color: #222;
   color: white;
+  position:relative;
 }
 #top_places .picture-wrapper {
-/*  overflow-x: scroll;
-  overflow-y: hidden;*/
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
-  height: 220px;
-
+  height: 240px;
 }
 #top_places h2 {
   margin: 0px;

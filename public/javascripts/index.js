@@ -6,6 +6,27 @@ $(document).ready(function() {
 	// 		submitCityQuery(query);
 	// 	}
 	// });
+	var scrollInterval = null;
+	var scrollLevel = 0;
+	var maxScrollLeft = 0;
+	$(document).on("mouseenter", ".right-hover-scroll", function() {
+		scrollInterval = setInterval(function() {
+			scrollLevel = Math.max(scrollLevel + 2, maxScrollLeft);
+			$(".picture-wrapper").scrollLeft(scrollLevel);
+		}, 1);
+	});
+	$(document).on("mouseout", ".right-hover-scroll", function() {
+		clearInterval(scrollInterval);
+	});
+	$(document).on("mouseover", ".left-hover-scroll", function() {
+		scrollInterval = setInterval(function() {
+			scrollLevel = Math.max(scrollLevel - 2, 0);
+			$(".picture-wrapper").scrollLeft(scrollLevel);
+		}, 1);
+	});
+	$(document).on("mouseout", ".left-hover-scroll", function() {
+		clearInterval(scrollInterval);
+	});
 
 	var submitCityQuery = function(query) {
 		var query = $("input#search_box").val();
@@ -19,6 +40,8 @@ $(document).ready(function() {
 		var queryUrl = encodeURIComponent(query);
 		$.get("/places/"+queryUrl, function(data) {
 			$("#place_selection").html(data);
+			var element = document.getElementsByClassName("picture-wrapper")[0];
+			maxScrollLeft = element.scrollWidth - element.clientWidth;
 
 			$('#step1_page').show();
 			$('#step1_page').addClass('animated fadeIn');
@@ -43,7 +66,6 @@ $(document).ready(function() {
 		console.log(selected_places);
 	});
 	$(document).on("mouseover", ".picture", function() {
-		console.log("here");
 		$(".content-panes .content").hide();
 		var id = $(this).data("id");
 		$(".content-panes .content[data-id="+id+"]").addClass("animated fadeIn");
