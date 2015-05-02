@@ -8,6 +8,10 @@ router.get('/', function(req, res) {
 	res.render('index');
 });
 
+router.get('/places/new', function(req, res) {
+	res.render('places/new');
+});
+
 router.get('/places/:city', function(req, res) {
 	var city = req.params["city"];
 	var places = place.Place.find({city: city}, function(err, docs) {

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Itinerus</title>
+    <% include ../_common_head.ejs %>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/new_places.css"/>
+  </head>
+  <body class="new-place-page">
+  	<% include ../_navbar.ejs %>
+  	<!-- Your Content -->
+  	<div class="container">
+  		<h1 class="font1 text-center">Suggest a cool place</h1>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="title" class="col-md-3 col-sm-2 control-label">Title</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="title" placeholder="e.g. Golden Gate Park">
+				</div>
+			</div>
+<!-- 			<div class="form-group">
+				<label for="location" class="col-md-3 col-sm-2 control-label">Where is this?</label>
+				<div class="col-md-3 col-sm-10">
+					<input type="text" class="form-control" id="location" placeholder="e.g. San Francisco, CA">
+				</div>
+			</div> -->
+			<div class="form-group">
+				<label for="description" class="col-md-3 col-sm-2 control-label">Description</label>
+				<div class="col-md-6 col-sm-10">
+					<textarea id="description" class="form-control" placeholder="Golden Gate Park, located in San Francisco, California, United States, is a large urban park consisting of 1,017 acres of public grounds.  It's Awesome!" rows="3"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="times" class="col-md-3 col-sm-2 control-label">Opening and Closing Times</label>
+				<div class="col-md-3 col-sm-10">
+					<input type="text" class="form-control" id="start" value="9:00am">
+				</div>
+				<div class="col-md-3 col-sm-10">
+					<input type="text" class="form-control" id="end" value="6:00pm">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="times" class="col-md-3 col-sm-2 control-label">Recommended Stay</label>
+				<div class="col-md-3 col-sm-10">
+					<input type="text" class="form-control" id="end" value="2 hours">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="image" class="col-md-3 col-sm-2 control-label">Example Image</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="image" placeholder="e.g. http://blahblah">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="image" class="col-md-3 col-sm-2 control-label">Center the Camera</label>
+				<div class="col-sm- text-center">
+					
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12 text-center">
+					<button type="submit" class="btn btn-default">Suggest</button>
+				</div>
+			</div>
+		</form>
+  	</div>
+  </body>
+</html>
+<!-- 
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="checkbox">
+						<label><input type="checkbox"> Remember me</label>
+					</div>
+				</div>
+			</div> -->

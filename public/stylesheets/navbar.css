@@ -14,10 +14,10 @@
 	padding: 4px;
 	cursor: pointer;
 	min-width: 50px;
+	text-decoration: none;
 }
 .bnavbar a.brand:hover {
-	text-decoration: none;
-	color: #ddd;
+	color: #dfdfdf;
 }
 
 /*nav.navbar {
