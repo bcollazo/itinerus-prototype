@@ -111,9 +111,82 @@ var dicts = [
 		city: "Puerto Rico",
 		images: ["http://www.puertoricoblogger.com/wp-content/uploads/2015/02/Cueva-Ventana-21.jpg"]
 }]
-// for (var i in dicts) {
-// 	Place.findOrCreate(dicts[i], function(err, doc) {
-// 		if (err) return console.log(err);
-// 		console.log(doc);
-// 	});
-// }
+
+var bosdict = [
+	{
+		title: "Fenway Park",
+		description: "Fenway Park is a baseball park in Boston, Massachusetts, located at 4 Yawkey Way near Kenmore Square. It has been the home of the Boston Red Sox Major League Baseball team since it opened in 1912 and it is the oldest ballpark in MLB.",
+		start_time: 900,
+		end_time: 1700,
+		duration: 130,
+		latitude: 42.347128, 
+		longitude: -71.095995,
+		city: "Boston, MA",
+		images: ["http://upload.wikimedia.org/wikipedia/commons/0/01/Fenway_from_Legend's_Box.jpg"
+		]
+	}, {	
+		title: "Museum of Fine Arts",
+		description: "The Museum of Fine Arts in Boston, Massachusetts, is one of the largest museums in the United States. It contains more than 450,000 works of art, making it one of the most comprehensive collections in the Americas.",
+		start_time: 1000,
+		end_time: 1630,
+		duration: 200,
+		latitude: 42.338659, 
+		longitude: -71.093468,
+		city: "Boston, MA",
+		images: ["https://d1ciw9phtlkz3p.cloudfront.net/events/Museum-of-Fine-Arts-Boston.jpg"
+			]
+	}, {
+		title: "New England Aquarium",
+		description: "The New England Aquarium is an aquarium located in Boston, Massachusetts. You will be amazed at the amount of marine life you can learn about in such a short time.",
+		start_time: 900,
+		end_time: 1800,
+		duration: 300,
+		latitude: 42.359132,
+		longitude: -71.049582,
+		city: "Boston, MA",
+		images: ["https://www.turnerconstruction.com/Files/ProjectImage?url=%2Fsites%2Fmarketingstories%2FMarketing%2520Story%2520Images%2Foriginal.62e31a73-aa21-4068-a8f4-4678898a6546.jpg&width=707&height=470&crop=True&jpegQuality=95"
+		]
+	}, {
+		title: "Faneuil Hall",
+		description: "Faneuil Hall, located near the waterfront and today's Government Center, in Boston, Massachusetts, has been a marketplace and a meeting hall since 1743. Customers enjoy unique, locally loved, and nationally recognized shops while indulging in the worldwide cuisine at our restaurants, pubs, and in the world-famous Quincy Market Colonnade.",
+		start_time: 900,
+		end_time: 1700,
+		duration: 230,
+		latitude: 42.360021,
+		longitude: -71.056227,
+		city: "Boston, MA",
+		images: ["http://cdn1.bostonmagazine.com/wp-content/uploads/2014/01/fanueil-main.jpg"
+		]
+	}, {	
+		title: "Museum of Science",
+		description: "The Museum of Science is a Boston, Massachusetts landmark, located in Science Park, a plot of land spanning the Charles River.",
+		start_time: 900,
+		end_time: 1700,
+		duration: 300,
+		latitude: 42.367543,
+		longitude: -71.071266,
+		city: "Boston, MA",
+		images: ["http://opentravel.com/img/TravelGuide/museum-of-science-boston-united-states-896_4.jpg"
+			]
+	}, {
+		title: "Isabella Stewart Gardner Museum",
+		description: "The Isabella Stewart Gardner Museum or Fenway Court, as the museum was known during Isabella Stewart Gardner's lifetime, is a museum in the Fenway-Kenmore neighborhood of Boston, Massachusetts.",
+		start_time: 900,
+		end_time: 1700,
+		duration: 130,
+		latitude: 42.3382473,
+		longitude: -71.099052,
+		city: "Boston, MA",
+		images: ["http://toursphere.files.wordpress.com/2012/04/isgm-courtyard.jpg"
+		]
+	} ]
+for (var i in dicts) {
+	Place.findOrCreate(dicts[i], function(err, doc) {
+		if (err) return console.log(err);
+	});
+}
+for (var i in bosdict) {
+	Place.findOrCreate(bosdict[i], function(err, doc) {
+		if (err) return console.log(err);
+	});
+}

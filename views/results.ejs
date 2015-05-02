@@ -6,6 +6,21 @@
     <link rel='stylesheet' href='/stylesheets/index.css' />
     <link rel='stylesheet' href='/stylesheets/results.css' />
     <script src='javascripts/index.js'></script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTsIBAjjSJ6ApYvhYeKnaKKTyRIfqf_lA">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat: -34.397, lng: 150.644},
+          zoom: 8
+        };
+        for (var i in $(".map-canvas")) {
+        	var map = new google.maps.Map(document.getElementById('map-canvas'+i), mapOptions);
+        }
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
   </head>
   <body>
   	  <% include _navbar2.ejs %>

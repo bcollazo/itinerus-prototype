@@ -6,9 +6,11 @@
 		<h3><strong>Day <%= i+1 %></strong></h3>
 		<% var day = itinerary.days[i]; %>
 		<% var progress = [["bar-clear", (day.events[0].start_time-600)/2400.0]]; %>
-
-		<div class="day">
-			<div class="events">
+		<div class="day row">
+			<!-- <div class="col-md-3">
+				<div id="map-canvas<%= i %>" class="map-canvas" style="height: 200px; width: 200px;"></div>
+			</div> -->
+			<div class="events col-md-9">
 				<% for (var j in day.events) { %>
 					<% var e = day.events[j]; %>
 					<% var percent = (e.end_time - e.start_time)/2400.0; %>
@@ -23,6 +25,8 @@
 					</div>
 				<% } %>
 			</div>
+		</div>
+		<div class="row">
 			<div class="progress">
 				<% for (var k in progress) { %>
 					<% var p = Math.ceil(progress[k][1]*100); %>
