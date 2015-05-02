@@ -4,6 +4,19 @@
     <title>Itinerus</title>
     <% include ../_common_head.ejs %>
     <link rel="stylesheet" type="text/css" href="../stylesheets/new_places.css"/>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTsIBAjjSJ6ApYvhYeKnaKKTyRIfqf_lA">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat: 0, lng: 0},
+          zoom: 1
+        };
+       	var map = new google.maps.Map(document.getElementById('cameramap-canvas'), mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
   </head>
   <body class="new-place-page">
   	<% include ../_navbar.ejs %>
@@ -51,9 +64,10 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="image" class="col-md-3 col-sm-2 control-label">Center the Camera</label>
-				<div class="col-sm- text-center">
-					
+				<label for="image" class="col-md-3 col-sm-2 control-label">Pinpoint its Location</label>
+				<div class="col-md-6 col-sm-10 text-center" style="position: relative;">
+					<i id="mapcrossaim" class="fa fa-map-marker unselectable"></i>
+					<div id="cameramap-canvas" class="map-canvas"></div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -66,7 +80,7 @@
   </body>
 </html>
 <!-- 
-
+height: 200px; width: 200px;
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<div class="checkbox">

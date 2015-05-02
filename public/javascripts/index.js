@@ -1,11 +1,12 @@
 $(document).ready(function() {
 	$("input#search_box").focus();
-	// $("input#search_box").keydown(function(e) {
-	// 	if (e.keyCode == 13) {
-	// 		var query = $("input#search_box").val();
-	// 		submitCityQuery(query);
-	// 	}
-	// });
+	$("input#search_box").keydown(function(e) {
+		if (e.keyCode == 13) {
+			var query = $("input#search_box").val();
+			// var city = getClosestLocation(query)
+			// submitCityQuery(city);
+		}
+	});
 	var scrollInterval = null;
 	var scrollLevel = 0;
 	var maxScrollLeft = 0;
@@ -30,6 +31,7 @@ $(document).ready(function() {
 
 	var submitCityQuery = function(query) {
 		var query = $("input#search_box").val();
+		console.log("SUBMITTING QUERY", query);
 		$('#selected_city h1').text(query);
 		$('#selected_city').show();
 		$('#selected_city').addClass('animated fadeIn');
@@ -45,13 +47,15 @@ $(document).ready(function() {
 
 			$('#step1_page').show();
 			$('#step1_page').addClass('animated fadeIn');
+			console.log("here");
 		});
 	}
 
 	var data = ["Boston, MA", "Puerto Rico"];
 	$('.typeahead').typeahead({ 
 		source:data,
-		afterSelect: submitCityQuery });
+		afterSelect: submitCityQuery 
+	});
 
 	var selected_places = {};
 	$(document).on("click", ".picture", function() {

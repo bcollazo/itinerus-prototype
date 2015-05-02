@@ -17,22 +17,32 @@
 	<div class="right-hover-scroll"></div>
 	<div class="picture-wrapper">
 	<% for (var i in places) { %>
-	<div class="picture" data-id="<%= places[i].id %>">
-		<img src="<%= places[i].images[0] %>">
-		<div class="mask"></div>
-		<div class="checkmark">
-			<i class="fa fa-check"></i>
+		<% if (i == 0) { %>
+		<%	active = "active"; %>
+		<% } else { %>
+		<%	active = ""; %>
+		<% } %>
+		<div class="picture <%= active %>" data-id="<%= places[i].id %>">
+			<img src="<%= places[i].images[0] %>">
+			<div class="mask"></div>
+			<div class="checkmark">
+				<i class="fa fa-check"></i>
+			</div>
 		</div>
-	</div>
 	<% } %>
 	</div>
 </div>
 
 <div class="content-panes container">
 	<% for (var i in places) { %>
-	<div class="content" data-id="<%= places[i].id %>" style="display: none;">
-		<h2><%= places[i].title %></h2>
-		<p class="lead"><%= places[i].description %></p>
-	</div>
+		<% if (i == 0) { %>
+		<%	active = "active"; %>
+		<% } else { %>
+		<%	active = ""; %>
+		<% } %>
+		<div class="content <%= active %>" data-id="<%= places[i].id %>" style="display: none;">
+			<h2><%= places[i].title %></h2>
+			<p class="lead"><%= places[i].description %></p>
+		</div>
 	<% } %>
 </div>

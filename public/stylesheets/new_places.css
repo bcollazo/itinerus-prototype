@@ -1,3 +1,28 @@
 body.new-place-page h1 {
 	margin-bottom: 20px;
 }
+#cameramap-canvas {
+	height: 300px;
+	width: 100%;
+}
+
+#mapcrossaim {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	top: 130px;
+	left: 50%;
+	z-index: 1;
+	text-align: center;
+	color: #222;
+}
+.unselectable {
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+}
