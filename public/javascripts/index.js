@@ -51,10 +51,14 @@ $(document).ready(function() {
 		});
 	}
 
-	var data = ["Boston, MA", "Puerto Rico"];
-	$('.typeahead').typeahead({ 
-		source:data,
-		afterSelect: submitCityQuery 
+	var data = [];
+	$.get("/locations", function(locations) {
+		data = locations;
+		console.log("locations are here!");
+		$('.typeahead').typeahead({ 
+			source:data,
+			afterSelect: submitCityQuery 
+		});
 	});
 
 	var selected_places = {};
