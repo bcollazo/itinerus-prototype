@@ -3,6 +3,28 @@ var place = require('./place');
 // var util = require('../util/place');
 var API_ENDPOINT = "https://maps.googleapis.com/maps/api/distancematrix/json?";
 
+var ComputedItinerary = function(days_list) {
+	console.log("COMPUTING ITINERARY===");
+	var places = [];
+	var travel_time = 0;
+	for (var i = 0; i < days_list.length; i++) {
+		var day = days_list[i];
+		for (var j = 0; j < day.events.length; j++) {
+			var e = day.events[j];
+			if (e.type == "Travel") {
+				travel_time += (e.end_time - e.start_time);
+			} else if (e.type == "Place") {
+				places.push(e.place);
+			}
+		}
+	}
+	return {
+		places: places,
+		days: days_list,
+		travel_time: Math.ceil(travel_time)
+	}
+}
+
 var Day = function() {
 	var events = [];
 	return {
@@ -27,27 +49,7 @@ var Event = function(type, start, end, place) {
 	};
 }
 
-var ComputedItinerary = function(days_list) {
-	console.log("COMPUTING ITINERARY===");
-	var places = [];
-	var travel_time = 0;
-	for (var i = 0; i < days_list.length; i++) {
-		var day = days_list[i];
-		for (var j = 0; j < day.events.length; j++) {
-			var e = day.events[j];
-			if (e.type == "Travel") {
-				travel_time += (e.end_time - e.start_time);
-			} else if (e.type == "Place") {
-				places.push(e.place);
-			}
-		}
-	}
-	return {
-		places: places,
-		days: days_list,
-		travel_time: Math.ceil(travel_time)
-	}
-}
+
 
 var computeValidItineraries = function(places, callback) {
 	// Get timematrix;
@@ -79,7 +81,7 @@ var generateAllItineraries = function(places, timearray) {
 	console.log(permutations.length + " permutations!");
 
 	var best = null;
-	var bestV = [places.length, 2400*places.length];
+	var bestV = [places.length, 24*60*60*places.length];
 	var goodItins = [];
 	for (var i in permutations) {
 		// Try permutation:
@@ -120,9 +122,9 @@ var getDayList = function(place_list, traveltimes) {
 		var place = place_list[i];
 		var next_place = place_list[i+1];
 		var travel_time = traveltimes[i]; // in mins
-		var h = Math.floor(travel_time / 60);
-		var m = Math.ceil(travel_time % 60);
-		travel_time = h*100 + m;
+		// var h = Math.floor(travel_time / 60);
+		// var m = Math.ceil(travel_time % 60);
+		// travel_time = h*100 + m;
 
 		days[days.length-1].addEvent(new Event("Place", tmp_time,
 			tmp_time+place.duration, place));
@@ -154,9 +156,9 @@ var parseGoogleDistanceMatrix = function(body) {
   		for (var j = 0; j < timematrix.length; j++) {
 			if (timematrix[i]["elements"][j]["status"] == "OK") {
 				timearray[i].push(
-					timematrix[i]["elements"][j]["duration"]["value"] / 60.0);
+					timematrix[i]["elements"][j]["duration"]["value"]); //in secs
 			} else {
-				timearray[i].push(2400);
+				timearray[i].push(24*60*60);
 			}
   		}
   	}
