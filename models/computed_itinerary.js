@@ -49,12 +49,24 @@ var Event = function(type, start, end, place) {
 	};
 }
 
-
+var Origin = new place.Place({
+	title: "Home",
+	description: "",
+	start_time: 0,
+	end_time: 24*60*60,
+	duration: 0,
+	// latitude: 42.3647555,
+	// longitude: -71.1032591,
+	latitude: 18.3668672,
+	longitude: -65.9030514,
+	city: "Boston, MA",
+	images: [""]
+});
 
 var computeValidItineraries = function(places, callback) {
 	// Get timematrix;
 	var timematrix = null;
-	var locations = [];
+	var locations = [Origin.latitude+","+Origin.longitude];
 	for (var i in places) {
 		var p = places[i];
 		locations.push(p.latitude+","+p.longitude);
@@ -65,13 +77,13 @@ var computeValidItineraries = function(places, callback) {
 	  if (!error && response.statusCode == 200) {
 	  	var timearray = parseGoogleDistanceMatrix(body);
 
-	  	var itin = generateAllItineraries(places, timearray);
+	  	var itin = getBestItinerary(places, timearray);
 	  	callback(itin);
 	  }
 	});
 }
 
-var generateAllItineraries = function(places, timearray) {
+var getBestItinerary = function(places, timearray) {
 	var range = [];
 	var n = places.length;
 	for (var i = 0; i < n; i++) {
@@ -90,10 +102,14 @@ var generateAllItineraries = function(places, timearray) {
 
 		var traveltimes = [];
 		for (var k = 0; k < n - 1; k++) {
-			traveltimes.push(timearray[p[k]][p[k+1]]);
+			traveltimes.push(timearray[p[k]+1][p[k+1]+1]);
+		}
+		var fromHome = [];
+		for (var k = 0; k < n ; k++) {
+			fromHome.push(timearray[0][p[k]+1]);
 		}
 
-		var days = getDayList(place_list, traveltimes);
+		var days = getDayList(place_list, traveltimes, fromHome);
 
 		if (days.length < bestV[0]) {
 			var c = new ComputedItinerary(days);
@@ -113,36 +129,51 @@ var generateAllItineraries = function(places, timearray) {
 	return best;
 }
 
-var getDayList = function(place_list, traveltimes) {
+var getDayList = function(place_list, traveltimes, fromHome) {
 	var days = [new Day()];
 	var tmp_time = place_list[0].start_time; // start the earliest
-	// var travel_time = 0; // Assume you start at first place
+	days[0].addEvent(new Event("Place", tmp_time - fromHome[0],
+		tmp_time - fromHome[0], Origin));
 
+	// tmp_time will be start of current
 	for (var i = 0; i < place_list.length-1; i++) {
+		// visit place in current day
 		var place = place_list[i];
-		var next_place = place_list[i+1];
-		var travel_time = traveltimes[i]; // in mins
-		// var h = Math.floor(travel_time / 60);
-		// var m = Math.ceil(travel_time % 60);
-		// travel_time = h*100 + m;
-
 		days[days.length-1].addEvent(new Event("Place", tmp_time,
 			tmp_time+place.duration, place));
+
 		// try to travel to next one.
+		var next_place = place_list[i+1];
+		var travel_time = traveltimes[i];
 		if (tmp_time + place.duration + travel_time + next_place.duration  < 
-			next_place.end_time) {
+			next_place.end_time) { // can go, then go
 			days[days.length-1].addEvent(new Event("Travel",
 				tmp_time+place.duration,
 				tmp_time+place.duration+travel_time));
 			tmp_time += place.duration + travel_time;
 		} else { // try next day
+			days[days.length-1].addEvent(new Event("Travel",
+				tmp_time+place.duration,
+				tmp_time+place.duration+fromHome[i]));
+			days[days.length-1].addEvent(new Event("Place", 
+				tmp_time+place.duration+fromHome[i],  //COULD BE +1
+				tmp_time+place.duration+fromHome[i], Origin));
 			days.push(new Day());
 			tmp_time = next_place.start_time;
+			days[days.length-1].addEvent(new Event("Place", 
+				tmp_time - fromHome[i+1],  //COULD BE +1
+				tmp_time - fromHome[i+1], Origin));
 		}
 	}
 	place = place_list[place_list.length-1];
 	days[days.length-1].addEvent(new Event("Place", tmp_time,
 		tmp_time+place.duration, place));
+	days[days.length-1].addEvent(new Event("Travel",
+		tmp_time+place.duration,
+		tmp_time+place.duration+fromHome[place_list.length-1]));
+	days[days.length-1].addEvent(new Event("Place", 
+		tmp_time+place.duration+fromHome[place_list.length-1],  //COULD BE +1
+		tmp_time+place.duration+fromHome[place_list.length-1], Origin));
 
 	return days;
 }
