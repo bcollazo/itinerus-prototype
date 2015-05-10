@@ -6,24 +6,62 @@
     <link rel='stylesheet' href='/stylesheets/index.css' />
     <link rel='stylesheet' href='/stylesheets/results.css' />
     <script src='javascripts/index.js'></script>
-    <script type="text/javascript"
+        <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTsIBAjjSJ6ApYvhYeKnaKKTyRIfqf_lA">
     </script>
     <script type="text/javascript">
       function initialize() {
-        var mapOptions = {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 8
-        };
-        for (var i in $(".map-canvas")) {
-        	var map = new google.maps.Map(document.getElementById('map-canvas'+i), mapOptions);
+        var renders = [];
+        var services = [];
+        for (var i = 0; i < $(".map-canvas").length; i++) {
+          console.log($("#map-canvas"+i).data("stops"));
+          var stops = $("#map-canvas"+i).data("stops").split("&");
+          var startCoors = stops[0].split(",");
+          var endCoors = stops[stops.length - 1].split(",");
+          console.log(startCoors);
+          console.log(endCoors);
+          var mapOptions = {
+            center: { lat: parseFloat(startCoors[0]), lng: parseFloat(startCoors[1])},
+            zoom: 13
+          };
+          renders.push(new google.maps.DirectionsRenderer());
+          services.push(new google.maps.DirectionsService());
+          var map = new google.maps.Map(document.getElementById('map-canvas'+i), mapOptions);
+          renders[i].setMap(map);
+          var request = {
+            origin: new google.maps.LatLng(startCoors[0], startCoors[1]),
+            destination: new google.maps.LatLng(endCoors[0], endCoors[1]),
+            travelMode: google.maps.TravelMode.DRIVING
+          };
+          if (stops.length > 2) {
+            var waypoints = [];
+            for (var j = 1; j < stops.length - 1; j++) {
+              console.log("waypoint"+j);
+              var coors = stops[j].split(",");
+              waypoints.push({
+                location: new google.maps.LatLng(coors[0], coors[1]),
+                stopover: true
+              });
+            }
+            request.waypoints = waypoints;
+          }
+
+          (function() {
+            var that = renders[i];
+            services[i].route(request, function(result, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                console.log(that);
+                that.setDirections(result);
+              }
+            });
+          })();
         }
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
   <body>
-  	  <% include _navbar2.ejs %>
-	  <% include _results.ejs %>
+  	  <% include _navbar.ejs %>
+	    <% include _results.ejs %>
   </body>
 </html>

@@ -7,17 +7,27 @@
 		<% var day = itinerary.days[i]; %>
 		<% var progress = [["bar-clear", (day.events[0].start_time-600)/2400.0]]; %>
 		<div class="day row">
-			<!-- <div class="col-md-3">
-				<div id="map-canvas<%= i %>" class="map-canvas" style="height: 200px; width: 200px;"></div>
-			</div> -->
-			<div class="events col-md-9">
+			<div class="col-sm-6 col-md-5">
+				<% var stops = []; %>
+				<% for (var j in day.events) { %>
+					<% var p = day.events[j].place; %>
+					<% if (p) { %>
+						<% stops.push(p.latitude + "," + p.longitude) %>
+					<% } %>
+				<% } %>
+				<div id="map-canvas<%= i %>" class="map-canvas" data-stops="<%= stops.join("&") %>"></div>
+			</div>
+			<div class="events col-sm-6 col-md-7">
 				<% for (var j in day.events) { %>
 					<% var e = day.events[j]; %>
 					<% var percent = (e.end_time - e.start_time)/2400.0; %>
 					<div class="event <%= e.type.toLowerCase() %>-event">
 						<% if (e.type == "Place") { %>
 							<% progress.push(["progress-bar-info", percent]); %>
-							<h3><%= e.place.title %> <small><%= e.start_time %> to <%= e.end_time %></small></h3>
+							<h3>
+								<%= e.place.title %> <small><%= humanize_time(e.start_time, true) %> to 
+								<%= humanize_time(e.end_time, true) %></small>
+							</h3>
 						<% } else { %>
 							<% progress.push(["progress-bar-warning progress-bar-striped", percent]); %>
 							<p>Travel</p>

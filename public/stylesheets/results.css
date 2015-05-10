@@ -28,3 +28,7 @@ body { height: 100%; margin: 0; padding: 0 }
 .progress {
 	margin-bottom: 0px;
 }
+
+.day .map-canvas {
+    min-height: 300px;
+}

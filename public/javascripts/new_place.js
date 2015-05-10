@@ -7,7 +7,7 @@ $(document).ready(function() {
 			description: $("textarea#description").val(),
 			start_time: $("select#start").val(),
 			end_time: $("select#end").val(),
-			duration: $("input#duration").val(),
+			duration: $("select#duration").val(),
 			latitude: lat,
 			longitude: lng,
 			city: state+", "+country,

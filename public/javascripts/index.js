@@ -7,27 +7,27 @@ $(document).ready(function() {
 			// submitCityQuery(city);
 		}
 	});
-	var scrollInterval = null;
-	var scrollLevel = 0;
-	var maxScrollLeft = 0;
-	$(document).on("mouseenter", ".right-hover-scroll", function() {
-		scrollInterval = setInterval(function() {
-			scrollLevel = Math.max(scrollLevel + 2, maxScrollLeft);
-			$(".picture-wrapper").scrollLeft(scrollLevel);
-		}, 1);
-	});
-	$(document).on("mouseout", ".right-hover-scroll", function() {
-		clearInterval(scrollInterval);
-	});
-	$(document).on("mouseover", ".left-hover-scroll", function() {
-		scrollInterval = setInterval(function() {
-			scrollLevel = Math.max(scrollLevel - 2, 0);
-			$(".picture-wrapper").scrollLeft(scrollLevel);
-		}, 1);
-	});
-	$(document).on("mouseout", ".left-hover-scroll", function() {
-		clearInterval(scrollInterval);
-	});
+	// var scrollInterval = null;
+	// var scrollLevel = 0;
+	// var maxScrollLeft = 0;
+	// $(document).on("mouseenter", ".right-hover-scroll", function() {
+	// 	scrollInterval = setInterval(function() {
+	// 		scrollLevel = Math.max(scrollLevel + 2, maxScrollLeft);
+	// 		$(".picture-wrapper").scrollLeft(scrollLevel);
+	// 	}, 1);
+	// });
+	// $(document).on("mouseout", ".right-hover-scroll", function() {
+	// 	clearInterval(scrollInterval);
+	// });
+	// $(document).on("mouseover", ".left-hover-scroll", function() {
+	// 	scrollInterval = setInterval(function() {
+	// 		scrollLevel = Math.max(scrollLevel - 2, 0);
+	// 		$(".picture-wrapper").scrollLeft(scrollLevel);
+	// 	}, 1);
+	// });
+	// $(document).on("mouseout", ".left-hover-scroll", function() {
+	// 	clearInterval(scrollInterval);
+	// });
 
 	var submitCityQuery = function(query) {
 		var query = $("input#search_box").val();
@@ -93,6 +93,9 @@ $(document).ready(function() {
 			$("#results_page").html(data);
 			$("#results_page").show();
 			$("#results_page").addClass("animated fadeIn");
+
+			window.location = "/results";
 		});
 	});
+
 });
