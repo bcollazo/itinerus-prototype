@@ -52,7 +52,7 @@ $(document).ready(function() {
 	}
 
 	var data = [];
-	$.get("/locations", function(locations) {
+	$.get("/api/locations", function(locations) {
 		data = locations;
 		console.log("locations are here!");
 		$('.typeahead').typeahead({ 
@@ -87,14 +87,15 @@ $(document).ready(function() {
 
 		var place_ids = Object.keys(selected_places);
 		console.log(place_ids);
-		$.get("/itinerary", {q: place_ids.join(",")}, function(data) {
-			$(".page").hide();
+		$.get("/api/itinerary", {q: place_ids.join(",")}, function(data) {
+			console.log(data);
+			// $(".page").hide();
 
-			$("#results_page").html(data);
-			$("#results_page").show();
-			$("#results_page").addClass("animated fadeIn");
+			// $("#results_page").html(data);
+			// $("#results_page").show();
+			// $("#results_page").addClass("animated fadeIn");
 
-			window.location = "/results";
+			window.location = "/results?q="+data;
 		});
 	});
 

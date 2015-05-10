@@ -1,6 +1,8 @@
 <div class="container">
 	<div class="page-header">
 		<h2>Recommended Itinerary</h2>
+		<button id="pdfbutton" class="btn btn-primary">Export to PDF</button>
+		<button id="emailbutton" class="btn btn-primary">Email to Friends</button>
 	</div>
 	<% for (var i = 0; i < itinerary.days.length; i++) { %>
 		<h3><strong>Day <%= i+1 %></strong></h3>
@@ -9,7 +11,7 @@
 		<div class="day row">
 			<div class="col-sm-6 col-md-5">
 				<% var stops = []; %>
-				<% for (var j in day.events) { %>
+				<% for (var j = 0; j < day.events.length; j++) { %>
 					<% var p = day.events[j].place; %>
 					<% if (p) { %>
 						<% stops.push(p.latitude + "," + p.longitude) %>
@@ -36,7 +38,10 @@
 				<% } %>
 			</div>
 		</div>
-		<div class="row">
+	<% } %>
+</div>
+
+		<!-- <div class="row">
 			<div class="progress">
 				<% for (var k in progress) { %>
 					<% var p = Math.ceil(progress[k][1]*100); %>
@@ -46,6 +51,4 @@
 				<% } %>
 			</div>
 			<hr class="shadow" />
-		</div>
-	<% } %>
-</div>
+		</div> -->

@@ -1,9 +1,21 @@
+var mongoose = require('mongoose');
 var request = require('request');
 var place = require('./place');
-// var util = require('../util/place');
 var API_ENDPOINT = "https://maps.googleapis.com/maps/api/distancematrix/json?";
 
-var ComputedItinerary = function(days_list) {
+var findOrCreate = require('mongoose-findorcreate');
+var ComputedItinerarySchema = new mongoose.Schema({
+	places: String,
+	days: String,
+	travel_time: Number
+});
+ComputedItinerarySchema.plugin(findOrCreate);
+var ComputedItinerary = mongoose.model("ComputedItinerary", 
+	ComputedItinerarySchema);
+
+exports.ComputedItinerary = ComputedItinerary;
+
+var getComputedItineraryFromDaysList = function(days_list) {
 	console.log("COMPUTING ITINERARY===");
 	var places = [];
 	var travel_time = 0;
@@ -18,11 +30,11 @@ var ComputedItinerary = function(days_list) {
 			}
 		}
 	}
-	return {
-		places: places,
-		days: days_list,
+	return new ComputedItinerary({
+		places: JSON.stringify(places),
+		days: JSON.stringify(days_list),
 		travel_time: Math.ceil(travel_time)
-	}
+	});
 }
 
 var Day = function() {
@@ -55,10 +67,6 @@ var Origin = new place.Place({
 	start_time: 0,
 	end_time: 24*60*60,
 	duration: 0,
-	// latitude: 42.3647555,
-	// longitude: -71.1032591,
-	latitude: 18.3668672,
-	longitude: -65.9030514,
 	city: "Boston, MA",
 	images: [""]
 });
@@ -66,6 +74,13 @@ var Origin = new place.Place({
 var computeValidItineraries = function(places, callback) {
 	// Get timematrix;
 	var timematrix = null;
+	if (places[0].city == "Boston, MA") {
+		Origin.latitude = 42.3647555;
+		Origin.longitude = -71.1032591;
+	} else {
+		Origin.latitude = 18.3668672;
+		Origin.longitude = -65.9030514;
+	}
 	var locations = [Origin.latitude+","+Origin.longitude];
 	for (var i in places) {
 		var p = places[i];
@@ -94,7 +109,6 @@ var getBestItinerary = function(places, timearray) {
 
 	var best = null;
 	var bestV = [places.length, 24*60*60*places.length];
-	var goodItins = [];
 	for (var i in permutations) {
 		// Try permutation:
 		var p = permutations[i];
@@ -112,8 +126,7 @@ var getBestItinerary = function(places, timearray) {
 		var days = getDayList(place_list, traveltimes, fromHome);
 
 		if (days.length < bestV[0]) {
-			var c = new ComputedItinerary(days);
-			goodItins.push(c);
+			var c = getComputedItineraryFromDaysList(days);
 			bestV[0] = days.length;
 			if (best == null || c.travel_time < bestV[1]) {
 				best = c;
@@ -134,6 +147,8 @@ var getDayList = function(place_list, traveltimes, fromHome) {
 	var tmp_time = place_list[0].start_time; // start the earliest
 	days[0].addEvent(new Event("Place", tmp_time - fromHome[0],
 		tmp_time - fromHome[0], Origin));
+	days[0].addEvent(new Event("Travel", tmp_time - fromHome[0],
+		tmp_time));
 
 	// tmp_time will be start of current
 	for (var i = 0; i < place_list.length-1; i++) {
@@ -156,13 +171,16 @@ var getDayList = function(place_list, traveltimes, fromHome) {
 				tmp_time+place.duration,
 				tmp_time+place.duration+fromHome[i]));
 			days[days.length-1].addEvent(new Event("Place", 
-				tmp_time+place.duration+fromHome[i],  //COULD BE +1
+				tmp_time+place.duration+fromHome[i],
 				tmp_time+place.duration+fromHome[i], Origin));
 			days.push(new Day());
 			tmp_time = next_place.start_time;
 			days[days.length-1].addEvent(new Event("Place", 
-				tmp_time - fromHome[i+1],  //COULD BE +1
+				tmp_time - fromHome[i+1],
 				tmp_time - fromHome[i+1], Origin));
+			days[days.length-1].addEvent(new Event("Travel", 
+				tmp_time - fromHome[i+1],
+				tmp_time));
 		}
 	}
 	place = place_list[place_list.length-1];
