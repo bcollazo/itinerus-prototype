@@ -32,7 +32,6 @@ var humanize_time = function(seconds, roundUp) {
 	}
 	if (hours == 0) hours = "12";
 	ans = hours + ":" + minutes + meridian;
-	console.log(seconds + "----" + ans);
 	return ans;
 }
 

@@ -13,6 +13,7 @@ router.get('/results', function(req, res) {
 	var id = req.query["q"];
 	var p = ComputedItinerary.find({_id: id}, function(err, docs) {
 		var itin = {
+			_id: docs[0]._id,
 			days: JSON.parse(docs[0].days), 
 			places: JSON.parse(docs[0].places),
 			travel_time: docs[0].traveltime

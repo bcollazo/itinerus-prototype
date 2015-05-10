@@ -88,13 +88,6 @@ $(document).ready(function() {
 		var place_ids = Object.keys(selected_places);
 		console.log(place_ids);
 		$.get("/api/itinerary", {q: place_ids.join(",")}, function(data) {
-			console.log(data);
-			// $(".page").hide();
-
-			// $("#results_page").html(data);
-			// $("#results_page").show();
-			// $("#results_page").addClass("animated fadeIn");
-
 			window.location = "/results?q="+data;
 		});
 	});

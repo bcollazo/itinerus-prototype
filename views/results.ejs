@@ -6,7 +6,6 @@
     <link rel='stylesheet' href='/stylesheets/index.css' />
     <link rel='stylesheet' href='/stylesheets/results.css' />
     <script src="javascripts/results.js"></script>
-    <script src='javascripts/index.js'></script>
         <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTsIBAjjSJ6ApYvhYeKnaKKTyRIfqf_lA">
     </script>
@@ -15,12 +14,9 @@
         var renders = [];
         var services = [];
         for (var i = 0; i < $(".map-canvas").length; i++) {
-          console.log($("#map-canvas"+i).data("stops"));
           var stops = $("#map-canvas"+i).data("stops").split("&");
           var startCoors = stops[0].split(",");
           var endCoors = stops[stops.length - 1].split(",");
-          console.log(startCoors);
-          console.log(endCoors);
           var mapOptions = {
             center: { lat: parseFloat(startCoors[0]), lng: parseFloat(startCoors[1])},
             zoom: 13
@@ -37,7 +33,6 @@
           if (stops.length > 2) {
             var waypoints = [];
             for (var j = 1; j < stops.length - 1; j++) {
-              console.log("waypoint"+j);
               var coors = stops[j].split(",");
               waypoints.push({
                 location: new google.maps.LatLng(coors[0], coors[1]),
@@ -63,6 +58,58 @@
   </head>
   <body>
   	  <% include _navbar.ejs %>
-	    <% include _results.ejs %>
+      <div class="container itinerary" data-id="<%= itinerary._id %>">
+        <div class="page-header">
+          <h2>Recommended Itinerary</h2>
+          <button id="emailbutton" class="btn btn-primary">Email to Friends</button>
+        </div>
+        <% for (var i = 0; i < itinerary.days.length; i++) { %>
+          <h3><strong>Day <%= i+1 %></strong></h3>
+          <% var day = itinerary.days[i]; %>
+          <% var progress = [["bar-clear", (day.events[0].start_time-600)/2400.0]]; %>
+          <div class="day row">
+            <div class="col-sm-6 col-md-5">
+              <% var stops = []; %>
+              <% for (var j = 0; j < day.events.length; j++) { %>
+                <% var p = day.events[j].place; %>
+                <% if (p) { %>
+                  <% stops.push(p.latitude + "," + p.longitude) %>
+                <% } %>
+              <% } %>
+              <div id="map-canvas<%= i %>" class="map-canvas" data-stops="<%= stops.join("&") %>"></div>
+            </div>
+            <div class="events col-sm-6 col-md-7">
+              <% for (var j in day.events) { %>
+                <% var e = day.events[j]; %>
+                <% var percent = (e.end_time - e.start_time)/2400.0; %>
+                <div class="event <%= e.type.toLowerCase() %>-event">
+                  <% if (e.type == "Place") { %>
+                    <% progress.push(["progress-bar-info", percent]); %>
+                    <h3>
+                      <%= e.place.title %> <small><%= humanize_time(e.start_time, true) %> to 
+                      <%= humanize_time(e.end_time, true) %></small>
+                    </h3>
+                  <% } else { %>
+                    <% progress.push(["progress-bar-warning progress-bar-striped", percent]); %>
+                    <p>Travel</p>
+                  <% } %>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        <% } %>
+      </div>
+
+          <!-- <div class="row">
+            <div class="progress">
+              <% for (var k in progress) { %>
+                <% var p = Math.ceil(progress[k][1]*100); %>
+                <div class="progress-bar <%= progress[k][0] %>" style="width: <%= p %>%">
+                  <span class="sr-only"><%= p %>% Percent</span>
+                </div>
+              <% } %>
+            </div>
+            <hr class="shadow" />
+          </div> -->
   </body>
 </html>
