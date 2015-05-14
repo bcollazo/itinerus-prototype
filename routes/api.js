@@ -31,9 +31,14 @@ router.get('/itinerary', function(req, res) {
 	var places = Place.find({_id: {$in:place_ids}}, function(err, docs) {
 		var itins = computed_itinerary.computeValidItineraries(docs, function(data) {
 			data.save(function(err) {
-				console.log(err);
+				if (err) {
+					console.log(err);
+				res.json(false);
+				} else {
+					res.json(data._id);
+				}
+
 			});
-			res.json(data._id);
 			// res.render('_results', {itinerary: data, humanize_time: util.humanize_time});
 		});
 	});
@@ -51,7 +56,6 @@ var transporter = nodemailer.createTransport({
 router.get('/itinerary/email', function(req, res) {
 	var q = req.query["q"];
 	var emails = req.query["emails"];
-	emails = "bcollazo@mit.edu";
 
 	var str = fs.readFileSync('views/results.ejs', 'utf8');
 	var template = ejs.compile(str, {filename: "views/results.js"});

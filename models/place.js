@@ -83,7 +83,8 @@ var dicts = [
 		latitude: 18.4660559,
 		longitude: -66.1190552,
 		city: "Puerto Rico",
-		images: ["http://img4.wikia.nocookie.net/__cb20141011225508/olympians/images/6/64/Old_San_Juan.jpg",
+		images: ["http://arounddeglobe.com/wp-content/uploads/2015/02/old-San-Jaun-Marvelous-Tourist-Spot_1.jpg",
+			"http://img4.wikia.nocookie.net/__cb20141011225508/olympians/images/6/64/Old_San_Juan.jpg",
 			"http://upload.wikimedia.org/wikipedia/commons/2/26/Old_san_juan.jpg"]
 	}, {
 		title: "Camuy River Cave Park",
